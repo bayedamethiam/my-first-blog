@@ -1,57 +1,36 @@
+{% extends 'blog/base.html' %}
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    {% load static %}
-    <meta charset="utf-8">
-    <title>Espace Membre</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-</head>
-
-<body>
-    <div class="page-header" style="
-    background-color: #ee7c2b;
-    margin-top: 0;
-    padding: 20px 20px 20px 40px;">
-        <h1 style=" color: #ffffff;
-        font-size: 36pt;
-        text-decoration: none;"><a href="/">Boy DJOLOF Blog</a></h1>
-    </div>
-    
-       
-            {% for post in posts %}
+{% block con %}
+{% for post in posts %}
 
 
 
-            <div class="card text-center col-6 justify-content-center">
-                <center>
-                <div class="card" style="width: 60rem;">
-                    
-                    <div class="card-body ">
-                        <h3 class="card-title"  style=" color: #C25100; font-family: 'Lobster';">{{ post.title }}</h3>
-                        <h4 class="card-subtitle mb-2 text-muted">{{ post.title }}</h4>
-                        <p class="card-text">{{ post.text }}</p>
-                        <a href="https://fr.wikipedia.org/wiki/Histoire_du_S%C3%A9n%C3%A9gal" class="card-link">Histoire du Senegal</a>
-                        <div class="card-footer text-muted">
-                            {{ post.published_date}}
-                        </div>
+<div class="card text-center col-6 justify-content-center">
+    <center>
+        <div class="card" style="width: 60rem;">
+
+            <div class="card-body ">
+                <h3 class="card-title"><a href="{% url 'post_detail' pk=post.pk %}"> {{ post.title }} </a></h3>
+                <h4 class="card-subtitle mb-2 text-muted">{{ post.title }}</h4>
+                <p class="card-text">{{ post.text }}</p>
+                <a href="https://fr.wikipedia.org/wiki/Histoire_du_S%C3%A9n%C3%A9gal" class="card-link">Histoire du
+                    Senegal</a>
+                    {% if post.published_date %}
+                    <div class="date">
+                        {{ post.published_date }}
                     </div>
-               
-                </div>
-            </center>
+                {% endif %}
             </div>
 
+        </div>
+    </center>
+</div>
 
-            <br>
-            <br>
-            <br>
-            {% endfor %}
+
+<br>
+<br>
+<br>
+{% endfor %}
+{% endblock %}
         
         
-  
-</body>
-
-</html>
